@@ -9,3 +9,8 @@ class SignUp(forms.Form):
     age = forms.IntegerField()
     password = forms.CharField(widget = forms.PasswordInput)
     re_password = forms.CharField(help_text = 'renter your password', widget = forms.PasswordInput)
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if len(password) < 4:
+            raise forms.ValidationError("password is too short")
+            return password
